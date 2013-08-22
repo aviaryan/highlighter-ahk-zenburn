@@ -11,6 +11,6 @@ See [Web preview](https://rawgithub.com/avi-aryan/highlighter-ahk-zenburn/master
   
   
 #### Using
-* See the **[test.html](test.html)** file source to get started and start using the higlighter for your projects.
+* See the **[Test.html](Test.html)** file source to get started and start using the higlighter for your projects.
 
 * Take a look at [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/) site for more details.
