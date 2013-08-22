@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Testing Ahk Zenburn-A</title>
+    
+    <!-- include main css-->
+    <link type="text/css" rel="stylesheet" href="styles/shCore.css"/>
+    <!-- include style css(s) you want-->
+    <link type="text/css" rel="stylesheet" href="styles/shThemeZenburn-A.css"/>
+
+    <!-- include Main brush-->
+    <script type="text/javascript" src="scripts/shCore.js"></script>
+    <!-- inluclude syntax brushes you want -->
+    <script type="text/javascript" src="scripts/shBrushAhk.js"></script>
+    
+    <!-- activate the syntax highlighter -->
+    <script type="text/javascript">
+        SyntaxHighlighter.all();
+    </script>
+    <!-- Done -->
+
+</head>
+
+<body>
+        <!-- Use the Autohotkey class in pre tag.
+        The class is   'brush: ahk;'   -->
+
+        <pre class="brush: ahk;">
+        ;Ahk code starts
+        #SingleInstance Force
+
+        msgbox Starting
+        msgbox % "Loading Databases"
+
+        Func("Avi", "Aryan")
+
+        a := 1 , b := a
+        sum := a + b ** 2
+
+        run notepad.exe
+
+        Func(val1, val2){
+            msgbox % val1 " " val2
+            return 0
+        }
+        </pre>
+
+        <br>
+        Another Sample :
+
+        <pre class="brush: ahk;">
+        Clipboard := ""
+        safeSleepTime := 50
+        FileDelete, % A_temp "/clipjumpcom.txt"
+        
+        ;Ini Configurations
+        Iniread, ini_Version, %CONFIGURATION_FILE%, System, Version
+        
+        If (!FileExist(CONFIGURATION_FILE) or ini_Version != VERSION)
+        {
+            FileDelete % CONFIGURATION_FILE     ;This is a nec. step to remove comments from prev. versions.
+            
+            IniWrite, 1, % CONFIGURATION_FILE, Main, limit_MaxClips
+            IniWrite, 20,% CONFIGURATION_FILE, Main, Minimum_No_Of_Clips_to_be_Active
+            IniWrite, 10,% CONFIGURATION_FILE, Main, Threshold
+            IniWrite, 1, % CONFIGURATION_FILE, Main, Show_Copy_Message
+        </pre>
+
+</body>
+
+</html>

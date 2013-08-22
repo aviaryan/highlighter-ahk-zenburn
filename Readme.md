@@ -1,0 +1,15 @@
+## AutoHotkey [Syntax Highlighter](http://alexgorbatchev.com/SyntaxHighlighter/) with Custom Zenburn Theme
+  
+**Note** - The Zenburn Theme can be used with any brush (programming language)  
+  
+Thanks to **[mjneish](http://users.on.net/~mjneish)** who first provided syntax brush for Autohotkey.  
+  
+
+#### Screenshot
+![Image](storage/screen1.jpg)
+  
+  
+#### Using
+* See the **[test.html](test.html)** file source to get started and start using the higlighter for your projects.
+
+* Take a look at [SyntaxHighlighter](http://alexgorbatchev.com/SyntaxHighlighter/) site for more details.
