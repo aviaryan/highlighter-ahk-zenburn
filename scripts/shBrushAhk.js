@@ -59,7 +59,7 @@ var funcs = 'Abs ACos Asc ASin ATan Ceil Chr Cos DllCall Exp' +
 ' FileExist Floor GetKeyState IL_Add IL_Create IL_Destroy InStr IsFunc IsLabel Ln' +
 ' Log LV_Add LV_Delete LV_DeleteCol LV_GetCount LV_GetNext LV_GetText LV_Insert LV_InsertCol LV_Modify' +
 ' LV_ModifyCol LV_SetImageList Mod NumGet NumPut OnMessage RegExMatch RegExReplace RegisterCallback Round' +
-' SB_SetIcon SB_SetParts SB_SetText Sin Sqrt StrLen SubStr Tan TV_Add TV_Delete' +
+' SB_SetIcon SB_SetParts SB_SetText Sin Sqrt StrGet StrLen SubStr Tan TV_Add TV_Delete' +
 ' TV_GetChild TV_GetCount TV_GetNext TV_Get TV_GetParent TV_GetPrev TV_GetSelection TV_GetText TV_Modify VarSetCapacity' +
 ' WinActive WinExist';
 
@@ -112,21 +112,22 @@ var directives = 'AllowSameLineComments ClipboardTimeout CommentFlag ErrorStdOut
 ' IfWinNotActive IfWinNotExist Include IncludeAgain InstallKeybdHook InstallMouseHook KeyHistory LTrim MaxHotkeysPerInterval MaxMem' +
 ' MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey NoEnv NoTrayIcon Persistent SingleInstance UseHook WinActivateForce';
 
-var signs = '\+ \\ \/ \* \+ \? \: \> \< \&';
+var signs = '\+ \\ \/ \* \+ \? \: \> \< \& \*\*';
 
 // css color keywords:
 // comments string keyword preprocessor variable value functions constants script color1-3
 
 this.regexList = [
 { regex: /[\:\=\?\:\>\<\&]/gm, css: 'preprocessor' }, //operators
+{ regex: /[a-z0-9_]+?\(/gmi, css: 'functions'}, //UD Functions
+
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
 { regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' }, // double quoted strings
 { regex: /\%\w+\%/g, css: 'variable' }, // variables
 
-{ regex: /[\&\<\>].*/gm, css: 'plain' }, // a bug in SyntaxHighlighter exists due to which these expressions are included as a match
-// the above line should be placed below the comment line and above the function line
-
+{ regex: /[\&\<\>]..../gm, css: 'plain' }, // a bug in SyntaxHighlighter exists due to which these expressions are included as a match
+// 4 dots indicate filling 4 characters with plain texts
 
 { regex: new RegExp(this.getKeywords(variables), 'gmi'), css: 'variable' }, // ahk variables
 { regex: new RegExp(this.getKeywords(funcs), 'gmi'), css: 'functions' }, // functions
@@ -141,3 +142,4 @@ this.regexList = [
 
 SyntaxHighlighter.brushes.Ahk.prototype = new SyntaxHighlighter.Highlighter();
 SyntaxHighlighter.brushes.Ahk.aliases = ['ahk', 'autohotkey']; 
+typeof(exports) != 'undefined' ? exports.SyntaxHighlighter.brushes.Ahk = SyntaxHighlighter.brushes.Ahk : null;

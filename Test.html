@@ -17,7 +17,7 @@
     
     <!-- activate the syntax highlighter -->
     <script type="text/javascript">
-	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = true;
         SyntaxHighlighter.all();
     </script>
     <!-- Done -->
@@ -67,8 +67,38 @@
             IniWrite, 20,% CONFIGURATION_FILE, Main, Minimum_No_Of_Clips_to_be_Active
             IniWrite, 10,% CONFIGURATION_FILE, Main, Threshold
             IniWrite, 1, % CONFIGURATION_FILE, Main, Show_Copy_Message
-        </pre>
-        
+        }
+	
+	static OSVEREX, init := VarSetCapacity(OSVEREX, 284, 0) && NumPut(284, OSVEREX, "UInt")
+	</pre>
+
+<pre class="brush: ahk;">
+GVEx := GetVersionEx()
+
+MsgBox, % "GetVersionEx function`n"
+        . "OSVERSIONINFOEX structure`n`n"
+        . "OSVersionInfoSize:`t`t"     GVEx[0] "`n"
+        . "MajorVersion:`t`t"          GVEx[1] "`n"
+        . "MinorVersion:`t`t"          GVEx[2] "`n"
+        . "BuildNumber:`t`t"           GVEx[3] "`n"
+        . "PlatformId:`t`t"            GVEx[4] "`n"
+        . "CSDVersion:`t`t"            GVEx[5] "`n"
+        . "ServicePackMajor:`t`t"      GVEx[6] "`n"
+        . "ServicePackMinor:`t`t"      GVEx[7] "`n"
+        . "SuiteMask:`t`t"             GVEx[8] "`n"
+        . "ProductType:`t`t"           GVEx[9]
+
+GetVersionEx() {
+    static OSVEREX, init := VarSetCapacity(OSVEREX, 284, 0) && NumPut(284, OSVEREX, "UInt")
+    if (DllCall("GetVersionEx", "Ptr", &OSVEREX))
+        return, { 0 : NumGet(OSVEREX,   0, "UInt"),   1 : NumGet(OSVEREX,       4, "UInt")
+                , 2 : NumGet(OSVEREX,   8, "UInt"),   3 : NumGet(OSVEREX,      12, "UInt")
+                , 4 : NumGet(OSVEREX,  16, "UInt"),   5 : StrGet(&OSVEREX+20, 128, "UTF-16")
+                , 6 : NumGet(OSVEREX, 276, "UShort"), 7 : NumGet(OSVEREX,     278, "UShort")
+                , 8 : NumGet(OSVEREX, 280, "UShort"), 9 : NumGet(OSVEREX,     282, "UChar") }
+}
+</pre>
+
 </body>
 
 </html>
