@@ -112,24 +112,28 @@ var directives = 'AllowSameLineComments ClipboardTimeout CommentFlag ErrorStdOut
 ' IfWinNotActive IfWinNotExist Include IncludeAgain InstallKeybdHook InstallMouseHook KeyHistory LTrim MaxHotkeysPerInterval MaxMem' +
 ' MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey NoEnv NoTrayIcon Persistent SingleInstance UseHook WinActivateForce';
 
-var hotkey = '::';
+var signs = '\+ \\ \/ \* \+ \? \: \> \< \&';
 
 // css color keywords:
 // comments string keyword preprocessor variable value functions constants script color1-3
 
 this.regexList = [
+{ regex: /[\:\=\?\:\>\<\&]/gm, css: 'preprocessor' }, //operators
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
 { regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' }, // double quoted strings
 { regex: /\%\w+\%/g, css: 'variable' }, // variables
+
+{ regex: /[\&\<\>].*/gm, css: 'plain' }, // a bug in SyntaxHighlighter exists due to which these expressions are included as a match
+// the above line should be placed below the comment line and above the function line
+
+
 { regex: new RegExp(this.getKeywords(variables), 'gmi'), css: 'variable' }, // ahk variables
 { regex: new RegExp(this.getKeywords(funcs), 'gmi'), css: 'functions' }, // functions
 { regex: new RegExp(this.getKeywords(keys), 'gmi'), css: 'value' }, // values
 { regex: new RegExp(this.getKeywords(commands), 'gmi'), css: 'constants' }, // constants
 { regex: new RegExp(this.getKeywords(directives), 'gmi'), css: 'keyword' }, // directives
-{ regex: new RegExp(this.getKeywords(hotkey), 'gmi'), css: 'functions' }, // hotkeys/hotstrings
 { regex: /^\s*\S+\:(?!=)/gm, css: 'functions' }, // labels
-// { regex: [\/\\\*\+\?\:], css: 'preprocessor' }, // symbols
 { regex: new RegExp(this.getKeywords(keywords), 'gmi'), css: 'keyword' } // keywords
 ];
 
