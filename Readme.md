@@ -1,4 +1,4 @@
-## AutoHotkey [Syntax Highlighter](http://alexgorbatchev.com/SyntaxHighlighter/) with Custom Zenburn Theme
+## AutoHotkey [Syntax Highlighter](http://alexgorbatchev.com/SyntaxHighlighter/) Brush with Custom Zenburn Theme
   
 **Note** - The Zenburn Theme can be used with any brush (programming language)  
   

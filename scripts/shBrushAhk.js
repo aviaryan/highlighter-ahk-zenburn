@@ -7,8 +7,10 @@
  * brush page: http://www.autohotkey.com/forum/topic46947.html
  * test page:  http://users.on.net/~mjneish/syntax/test.html
  *
- * Enhanced by Avi Aryan
+ * Fixed, Enhanced & Updated by Avi Aryan
  * homepage:   http://avi-aryan.github.io
+ * git repo:   http://github.com/avi-aryan/highlighter-ahk-zenburn
+ *
  */
 
 
@@ -120,14 +122,18 @@ var signs = '\+ \\ \/ \* \+ \? \: \> \< \& \*\*';
 this.regexList = [
 { regex: /[\:\=\?\:\>\<\&]/gm, css: 'preprocessor' }, //operators
 { regex: /[a-z0-9_]+?\(/gmi, css: 'functions'}, //UD Functions
+{ regex: /\(/g, css: 'plain'}, //convert all ( to plain
 
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
 { regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' }, // double quoted strings
 { regex: /\%\w+\%/g, css: 'variable' }, // variables
 
-{ regex: /[\&\<\>]..../gm, css: 'plain' }, // a bug in SyntaxHighlighter exists due to which these expressions are included as a match
-// 4 dots indicate filling 4 characters with plain texts
+// a bug in SyntaxHighlighter in which &>< are replaced by &amp; *gt; &lt;
+// as gt; and lt; have 3 chars , three dots are used . </> is replaced by &gt;/&lt; from where & is replaced back to </>
+{ regex: /[&<>].../gm, css: 'plain' },
+// replaces &amp; back to & , 3 dots are as [^something]... consumes 4 characters viz. amp;
+{ regex: /[&][^gl].../gm, css: 'plain'},
 
 { regex: new RegExp(this.getKeywords(variables), 'gmi'), css: 'variable' }, // ahk variables
 { regex: new RegExp(this.getKeywords(funcs), 'gmi'), css: 'functions' }, // functions
@@ -137,6 +143,9 @@ this.regexList = [
 { regex: /^\s*\S+\:(?!=)/gm, css: 'functions' }, // labels
 { regex: new RegExp(this.getKeywords(keywords), 'gmi'), css: 'keyword' } // keywords
 ];
+
+var r = SyntaxHighlighter.regexLib;
+this.forHtmlScript(r.scriptScriptTags);
 
 };
 

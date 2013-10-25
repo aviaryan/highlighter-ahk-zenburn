@@ -51,27 +51,6 @@
         <br>
         Another Sample :
 
-        <pre class="brush: ahk;">
-        Clipboard := ""
-        safeSleepTime := 50
-        FileDelete, % A_temp "/clipjumpcom.txt"
-        
-        ;Ini Configurations
-        Iniread, ini_Version, %CONFIGURATION_FILE%, System, Version
-        
-        If (!FileExist(CONFIGURATION_FILE) or ini_Version != VERSION)
-        {
-            FileDelete % CONFIGURATION_FILE     ;This is a nec. step to remove comments from prev. versions.
-            
-            IniWrite, 1, % CONFIGURATION_FILE, Main, limit_MaxClips
-            IniWrite, 20,% CONFIGURATION_FILE, Main, Minimum_No_Of_Clips_to_be_Active
-            IniWrite, 10,% CONFIGURATION_FILE, Main, Threshold
-            IniWrite, 1, % CONFIGURATION_FILE, Main, Show_Copy_Message
-        }
-	
-	static OSVEREX, init := VarSetCapacity(OSVEREX, 284, 0) && NumPut(284, OSVEREX, "UInt")
-	</pre>
-
 <pre class="brush: ahk;">
 GVEx := GetVersionEx()
 
@@ -97,6 +76,9 @@ GetVersionEx() {
                 , 6 : NumGet(OSVEREX, 276, "UShort"), 7 : NumGet(OSVEREX,     278, "UShort")
                 , 8 : NumGet(OSVEREX, 280, "UShort"), 9 : NumGet(OSVEREX,     282, "UChar") }
 }
+
+MinorVersion := DllCall("GetVersion") >> 8  & 0xff
+BuildVersion := DllCall("GetVersion") >> 16 & 0xffff
 </pre>
 
 </body>
