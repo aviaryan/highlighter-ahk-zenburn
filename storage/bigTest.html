@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Testing Ahk Zenburn-A</title>
+    
+    <!-- include main css-->
+    <link type="text/css" rel="stylesheet" href="../styles/shCore.css"/>
+    <!-- include style css(s) you want-->
+    <link type="text/css" rel="stylesheet" href="../styles/shThemeZenburn-A.css"/>
+
+    <!-- include Main brush-->
+    <script type="text/javascript" src="../scripts/shCore.js"></script>
+    <!-- inluclude syntax brushes you want -->
+    <script type="text/javascript" src="../scripts/shBrushAhk.js"></script>
+    
+    <!-- activate the syntax highlighter -->
+    <script type="text/javascript">
+	SyntaxHighlighter.defaults['toolbar'] = true;
+        SyntaxHighlighter.all();
+    </script>
+    <!-- Done -->
+
+</head>
+
+<body>
+        <!-- Use the Autohotkey class in pre tag.
+        The class is   'brush: ahk;'   -->
+
+<h2>SKAN'S DLLapi</h2>
+<pre class="brush: ahk;">
+#SingleInstance, Force
+SetBatchLines -1
+Sps := "                                "
+VarSetCapacity( A_SysDir,520 ), DllCall( "GetSystemDirectory", Str,A_SysDir, UInt,260 )
+
+TrayTip, Function Exports - Viewer,                                    Scanning %A_sysDir%
+Loop %A_SysDir%\*.dll
+ If   ( Funx := PE_FunctionExports( A_LoopFileLongPath ) )
+   && ( File := SubStr(A_LoopFileName,1,StrLen(A_LoopFileName)-4 ) )
+    Loop, Parse, Funx, `n
+      If InStr( A_LoopField, "@" ) || ! A_LoopField
+           Continue
+      Else Data .= SubStr( File . Sps, 1,16 ) A_LoopField "`n"
+StringReplace, Data, Data, `n, `n, UseErrorLevel
+TotalFunctions := ErrorLevel
+StringTrimRight, Data, Data, 1
+Sort, Data, P17 D`n
+
+Gui, Font, s10, Arial
+Gui, Add, Edit, w439 h20 -E0x200 UpperCase hWndhEdit cAA1010 Border vQuery gSTimer
+SendMessage, 0xD3, 0x1,5,, ahk_id %hEdit%
+Gui, Add, ListView, Yp+19 R15 w439  -E0x200 +Border gDClick, Function|Library
+LV_ModifyCol( 1, "290" ), LV_ModifyCol( 2, "125" )
+
+TrayTip, Function Exports - Viewer,                              Loading List of Functions
+Loop, Parse, Data, `n
+ LV_Add( "", SubStr(A_LoopField,17 ), SubStr( A_LoopField,1,16) )
+TrayTip
+
+Gui, Show,, Function Exports: %TotalFunctions% in [ %A_SysDir% ]
+Return                                                ; // end of auto-execute function //
+
+GuiClose:
+ Exitapp
+
+sTimer:
+ SetTimer, FunctionSearch, -250
+Return
+
+FunctionSearch:
+ Critical
+ GuiControlGet, Query
+ LV_Delete()
+ If ( Query="" ) {
+   Loop, Parse, Data, `n
+   LV_Add( "", SubStr(A_LoopField,17 ), SubStr( A_LoopField,1,16) )
+   Return
+ }  StringReplace, Query, Query, +, +, UseErrorLevel
+ SearchItems := ErrorLevel+1
+ Loop, Parse, Data, `n
+ { Line := A_LoopField, Result := 0
+   Loop, Parse, Query, +
+   Result := InStr( Line,A_LoopField,0,17 ) ? Result+1 : Result
+   If ( Result = SearchItems )
+     LV_Add( "", SubStr(A_LoopField,17 ), SubStr( A_LoopField,1,16) )
+ } Return
+
+DClick:
+ IfNotEqual, A_GuiEvent, DoubleClick, Return
+GotoURL:
+ Critical
+ Row := LV_GetNext( 0, "Focused" ), LV_GetText( Func,Row,1 )
+ If ( SubStr(Func,0) == "A" || SubStr(Func,0) == "W" )
+    StringTrimRight, Func, Func, 1
+ URL1 := "http://www.google.com/search?hl=en&q=" Func
+      . "+Function+site:microsoft.com&btnI=I'm+Feeling+Lucky"
+ URL2 := "http://www.google.com/search?hl=en&q=" Func "&btnI=I'm+Feeling+Lucky"
+ If GetKeyState( "LControl", "P" )
+      Run, %Url2%,,Max
+ Else Run, %Url1%,,Max
+Return
+
+PE_FunctionExports( PEFile ) {
+ VarSetCapacity( $LI,48,0 ), DllCall( "ImageHlp\MapAndLoad", A_IsUnicode ? "AStr" : "Str"
+                                                 ,PEFile, Int,0, UInt,&$LI, Int,1, Int,1 )
+ nPtr := DllCall( "ImageHlp\ImageRvaToVa", UInt,Numget( $LI,12 ), UInt,Numget( $LI,08 )
+       , UInt, NumGet( ( P := DllCall( "ImageHlp\ImageDirectoryEntryToData", UInt
+       , NumGet( $LI,8 ), Int,0, UShort,0, UIntP,nSz )) + 12 ), UInt,0 )
+ VarSetCapacity( Var,1024,0 ), VarSetCapacity( List,10240,0 )
+ IfEqual,nPtr,0, Return SubStr( DllCall( "ImageHlp\UnMapAndLoad", UInt,&$LI ), 0,0 )
+ Loop % NumGet( P+24 ) + 1
+    A_IsUnicode ? Var := DllCall( "MulDiv", Int,nPtr, Int,1, Int,1, AStr )
+                : DllCall( "lstrcpy", Str,Var, UInt,nPtr )
+  , nPtr := nPtr+StrLen( Var )+1,  List .= "`n" Var, A_Index=1 ? Omit := StrLen( Var )+2 :
+ StringTrimLeft, List, List, %Omit%
+ DllCall( "ImageHlp\UnMapAndLoad", UInt,&$LI )
+ Return List
+}
+</pre>
+
+<br>
+
+<h2>Font by Majniketor</h2>
+<pre class="brush: ahk;">
+Font(HCtrl="", Font="", BRedraw=1) {
+	static WM_SETFONT := 0x30
+	
+	if Font is not integer
+	{
+		StringSplit, Font, Font, `,,%A_Space%%A_Tab%
+		fontStyle := Font1, fontFace := Font2
+
+	  ;parse font 
+		italic      := InStr(Font1, "italic")    ?  1    :  0 
+		underline   := InStr(Font1, "underline") ?  1    :  0 
+		strikeout   := InStr(Font1, "strikeout") ?  1    :  0 
+		weight      := InStr(Font1, "bold")      ? 700   : 400 
+
+	  ;height 
+
+		RegExMatch(Font1, "(?<=[S|s])(\d{1,2})(?=[ ,]*)", height) 
+		ifEqual, height,, SetEnv, height, 10
+		RegRead, LogPixels, HKEY_LOCAL_MACHINE, SOFTWARE\Microsoft\Windows NT\CurrentVersion\FontDPI, LogPixels 
+		height := -DllCall("MulDiv", "int", Height, "int", LogPixels, "int", 72) 
+	
+		IfEqual, Font2,,SetEnv Font2, MS Sans Serif
+	 ;create font 
+		hFont   := DllCall("CreateFont", "int",  height, "int",  0, "int",  0, "int", 0
+						  ,"int",  weight,   "Uint", italic,   "Uint", underline 
+						  ,"uint", strikeOut, "Uint", nCharSet, "Uint", 0, "Uint", 0, "Uint", 0, "Uint", 0, "str", Font2, "Uint")
+	} else hFont := Font
+	ifNotEqual, HCtrl,,SendMessage, WM_SETFONT, hFont, BRedraw,,ahk_id %HCtrl%
+	return hFont
+}
+</pre>
+
+<h2>Code by jniZm</h2>
+<pre class="brush: ahk;">
+GVEx := GetVersionEx()
+
+MsgBox, % "GetVersionEx function`n"
+        . "OSVERSIONINFOEX structure`n`n"
+        . "OSVersionInfoSize:`t`t"     GVEx[0] "`n"
+        . "MajorVersion:`t`t"          GVEx[1] "`n"
+        . "MinorVersion:`t`t"          GVEx[2] "`n"
+        . "BuildNumber:`t`t"           GVEx[3] "`n"
+        . "PlatformId:`t`t"            GVEx[4] "`n"
+        . "CSDVersion:`t`t"            GVEx[5] "`n"
+        . "ServicePackMajor:`t`t"      GVEx[6] "`n"
+        . "ServicePackMinor:`t`t"      GVEx[7] "`n"
+        . "SuiteMask:`t`t"             GVEx[8] "`n"
+        . "ProductType:`t`t"           GVEx[9]
+
+GetVersionEx() {
+    static OSVEREX, init := VarSetCapacity(OSVEREX, 284, 0) && NumPut(284, OSVEREX, "UInt")
+    if (DllCall("GetVersionEx", "Ptr", &OSVEREX))
+        return, { 0 : NumGet(OSVEREX,   0, "UInt"),   1 : NumGet(OSVEREX,       4, "UInt")
+                , 2 : NumGet(OSVEREX,   8, "UInt"),   3 : NumGet(OSVEREX,      12, "UInt")
+                , 4 : NumGet(OSVEREX,  16, "UInt"),   5 : StrGet(&OSVEREX+20, 128, "UTF-16")
+                , 6 : NumGet(OSVEREX, 276, "UShort"), 7 : NumGet(OSVEREX,     278, "UShort")
+                , 8 : NumGet(OSVEREX, 280, "UShort"), 9 : NumGet(OSVEREX,     282, "UChar") }
+}
+
+MinorVersion := DllCall("GetVersion") >> 8  & 0xff
+BuildVersion := DllCall("GetVersion") >> 16 & 0xffff
+</pre>
+
+</body>
+
+</html>

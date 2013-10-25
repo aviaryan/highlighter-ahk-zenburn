@@ -28,7 +28,7 @@
         <!-- Use the Autohotkey class in pre tag.
         The class is   'brush: ahk;'   -->
 
-        <pre class="brush: ahk;">
+<pre class="brush: ahk;">
         ;Ahk code starts
         #SingleInstance Force
 
@@ -38,48 +38,20 @@
         Func("Avi", "Aryan")
 
         a := 1 , b := a
-        sum := a + b ** 2
+        sum := a + ( b ** 2 )
 
-        run notepad.exe
+        run , notepad.exe
 
         Func(val1, val2){
             msgbox % val1 " " val2
             return 0
         }
+
+	Func2(str){
+ 		if DllCall("OpenClipboard")
+			return DllCall("CloseClipboard")
+	}
         </pre>
-
-        <br>
-        Another Sample :
-
-<pre class="brush: ahk;">
-GVEx := GetVersionEx()
-
-MsgBox, % "GetVersionEx function`n"
-        . "OSVERSIONINFOEX structure`n`n"
-        . "OSVersionInfoSize:`t`t"     GVEx[0] "`n"
-        . "MajorVersion:`t`t"          GVEx[1] "`n"
-        . "MinorVersion:`t`t"          GVEx[2] "`n"
-        . "BuildNumber:`t`t"           GVEx[3] "`n"
-        . "PlatformId:`t`t"            GVEx[4] "`n"
-        . "CSDVersion:`t`t"            GVEx[5] "`n"
-        . "ServicePackMajor:`t`t"      GVEx[6] "`n"
-        . "ServicePackMinor:`t`t"      GVEx[7] "`n"
-        . "SuiteMask:`t`t"             GVEx[8] "`n"
-        . "ProductType:`t`t"           GVEx[9]
-
-GetVersionEx() {
-    static OSVEREX, init := VarSetCapacity(OSVEREX, 284, 0) && NumPut(284, OSVEREX, "UInt")
-    if (DllCall("GetVersionEx", "Ptr", &OSVEREX))
-        return, { 0 : NumGet(OSVEREX,   0, "UInt"),   1 : NumGet(OSVEREX,       4, "UInt")
-                , 2 : NumGet(OSVEREX,   8, "UInt"),   3 : NumGet(OSVEREX,      12, "UInt")
-                , 4 : NumGet(OSVEREX,  16, "UInt"),   5 : StrGet(&OSVEREX+20, 128, "UTF-16")
-                , 6 : NumGet(OSVEREX, 276, "UShort"), 7 : NumGet(OSVEREX,     278, "UShort")
-                , 8 : NumGet(OSVEREX, 280, "UShort"), 9 : NumGet(OSVEREX,     282, "UChar") }
-}
-
-MinorVersion := DllCall("GetVersion") >> 8  & 0xff
-BuildVersion := DllCall("GetVersion") >> 16 & 0xffff
-</pre>
 
 </body>
 
