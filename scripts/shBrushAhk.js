@@ -57,7 +57,7 @@ var keys = 'Shift LShift RShift Alt' +
 ' Browser_Forward Browser_Refresh Browser_Stop Browser_Search Browser_Favorites Browser_Home Volume_Mute Volume_Down Volume_Up Media_Next' +
 ' Media_Prev Media_Stop Media_Play_Pause Launch_Mail Launch_Media Launch_App1 Launch_App2';
 
-var funcs = 'Abs ACos Asc ASin ATan Ceil Chr Cos DllCall Exp' +
+var funcs = '¶Dummyfunction_for_highlight Abs ACos Asc ASin ATan Ceil Chr Cos DllCall Exp' +
 ' FileExist Floor GetKeyState IL_Add IL_Create IL_Destroy InStr IsFunc IsLabel Ln' +
 ' Log LV_Add LV_Delete LV_DeleteCol LV_GetCount LV_GetNext LV_GetText LV_Insert LV_InsertCol LV_Modify' +
 ' LV_ModifyCol LV_SetImageList Mod NumGet NumPut OnMessage RegExMatch RegExReplace RegisterCallback Round' +
@@ -117,16 +117,16 @@ var directives = 'AllowSameLineComments ClipboardTimeout CommentFlag ErrorStdOut
 var signs = '\+ \\ \/ \* \+ \? \: \> \< \& \*\*';
 
 // css color keywords:
-// comments string keyword preprocessor variable value functions constants script color1-3
+// The regex items are processed in alphabetical order of regex term
 
 this.regexList = [
-{ regex: /[\:\=\?\:\>\<\&]/gm, css: 'preprocessor' }, //operators
-{ regex: /[a-z0-9_]+?\(/gmi, css: 'functions'}, //UD Functions
-{ regex: /\(/g, css: 'plain'}, //convert all ( to plain
+{ regex: /[\+\*\-\=\?>:\\\/<\&]/gm, css: 'preprocessor' }, //operators
+//{ regex: /[A-Z0-9_]+?\(/gmi, css: 'udfunctions'}, //UD Functions
+//{ regex: /(\()/gmi, css: 'plain'}, //convert all ( to plain
 
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
-{ regex: SyntaxHighlighter.regexLib.doubleQuotedString, css: 'string' }, // double quoted strings
+{ regex: /"(([^"]|"")*)"/gmi, css: 'string' }, // double quoted strings
 { regex: /\%\w+\%/g, css: 'variable' }, // variables
 
 // a bug in SyntaxHighlighter in which &>< are replaced by &amp; *gt; &lt;
@@ -137,10 +137,10 @@ this.regexList = [
 
 { regex: new RegExp(this.getKeywords(variables), 'gmi'), css: 'variable' }, // ahk variables
 { regex: new RegExp(this.getKeywords(funcs), 'gmi'), css: 'functions' }, // functions
-{ regex: new RegExp(this.getKeywords(keys), 'gmi'), css: 'value' }, // values
+{ regex: new RegExp(this.getKeywords(keys), 'gmi'), css: 'value' }, // values (actually Keys)
 { regex: new RegExp(this.getKeywords(commands), 'gmi'), css: 'constants' }, // constants
 { regex: new RegExp(this.getKeywords(directives), 'gmi'), css: 'keyword' }, // directives
-{ regex: /^\s*\S+\:(?!=)/gm, css: 'functions' }, // labels
+{ regex: /^\s*\S+\:(?!=)/gm, css: 'labels' }, // labels
 { regex: new RegExp(this.getKeywords(keywords), 'gmi'), css: 'keyword' } // keywords
 ];
 

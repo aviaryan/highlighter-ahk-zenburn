@@ -1,6 +1,7 @@
 /**
  * Zenburn-A theme by Avi Aryan
  * http://avi-aryan.github.io
+ * best suited for AutoHotkey Brush by Avi Aryan (http://github.com/avi-aryan/highlighter-ahk-zenburn)
  */
 
 .syntaxhighlighter textarea {
@@ -88,13 +89,19 @@
   color: #B4DB19 !important;
 }
 .syntaxhighlighter .variable {
-  color: #CC8870 !important;
+  color: #B8BEEF !important;
 }
 .syntaxhighlighter .value {
   color: #009900 !important;
 }
 .syntaxhighlighter .functions {
   color: #fbb3f3 /*aaaaaa*/ !important;
+}
+.syntaxhighlighter .udfunctions {
+  color: #D6BDCA !important;
+}
+.syntaxhighlighter .labels {
+  color: #F17FA7 !important;
 }
 .syntaxhighlighter .constants {
   color: #96daff !important;

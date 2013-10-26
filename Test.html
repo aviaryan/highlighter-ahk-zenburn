@@ -28,30 +28,33 @@
         <!-- Use the Autohotkey class in pre tag.
         The class is   'brush: ahk;'   -->
 
-<pre class="brush: ahk;">
-        ;Ahk code starts
-        #SingleInstance Force
+	<pre class="brush: ahk;">
+    ;Ahk code starts
+    #SingleInstance Force
+    msgbox Starting
+    msgbox % "Loading Databases"
 
-        msgbox Starting
-        msgbox % "Loading Databases"
+    Func("Avi", "Aryan")
 
-        Func("Avi", "Aryan")
+    a := 1 , b := a
+    sum := a + ( b ** 2 )
 
-        a := 1 , b := a
-        sum := a + ( b ** 2 )
+    run , notepad.exe
 
-        run , notepad.exe
-
-        Func(val1, val2){
-            msgbox % val1 " " val2
-            return 0
-        }
+	Func(val1, val2){
+		msgbox % val1 " " val2
+		return 0
+	}
 
 	Func2(str){
  		if DllCall("OpenClipboard")
 			return DllCall("CloseClipboard")
 	}
-        </pre>
+
+	label:
+		msgbox, I do nothing
+		return
+    </pre>
 
 </body>
 
