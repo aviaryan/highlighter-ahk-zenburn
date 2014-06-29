@@ -3,12 +3,12 @@
 <html>
 
 <head>
-  <title>Testing Ahk Zenburn-A</title>
+  <title>Testing Github theme</title>
     
     <!-- include main css-->
     <link type="text/css" rel="stylesheet" href="styles/shCore.css"/>
     <!-- include style css(s) you want-->
-    <link type="text/css" rel="stylesheet" href="styles/shThemeZenburn-A.css"/>
+    <link type="text/css" rel="stylesheet" href="styles/shThemeGitHub.css"/>
 
     <!-- include Main brush-->
     <script type="text/javascript" src="scripts/shCore.js"></script>
@@ -17,7 +17,7 @@
     
     <!-- activate the syntax highlighter -->
     <script type="text/javascript">
-	SyntaxHighlighter.defaults['toolbar'] = true;
+	SyntaxHighlighter.defaults['toolbar'] = false;
         SyntaxHighlighter.all();
     </script>
     <!-- Done -->
@@ -25,8 +25,8 @@
 </head>
 
 <body>
-        <!-- Use the Autohotkey class in pre tag.
-        The class is   'brush: ahk;'   -->
+<!-- Use the Autohotkey class in pre tag.
+The class is   'brush: ahk;'   -->
 
 <pre class="brush: ahk;">
 ;Ahk code starts
@@ -47,22 +47,21 @@ if (true) {
 }
 
 Func(val1, val2){
-	msgbox % val1 " " val2
-	return 0
+    msgbox % val1 " " val2
+    return 0
 }
 
 Func2(str){
- 	if DllCall("OpenClipboard")
-		return DllCall("CloseClipboard")
+    if DllCall("OpenClipboard")
+        return DllCall("CloseClipboard")
 }
-		
-	func3(){
-	}
+        
+    func3(){
+    }
 
 mylabel:
-	msgbox, I do nothing
-	return
-
+    msgbox, I do nothing
+    return
 </pre>
 
 </body>

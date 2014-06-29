@@ -8,9 +8,11 @@
  * test page:  http://users.on.net/~mjneish/syntax/test.html
  *
  * Fixed, Enhanced & Updated by Avi Aryan
- * homepage:   http://avi-aryan.github.io
- * git repo:   http://github.com/avi-aryan/highlighter-ahk-zenburn
+ * homepage:   http://aviaryan.github.io
+ * git repo:   http://github.com/aviaryan/highlighter-ahk-zenburn
  *
+ * Official Themes
+ * Zenburn-A , GitHub
  */
 
 
@@ -120,9 +122,9 @@ var signs = '\+ \\ \/ \* \+ \? \: \> \< \& \*\*';
 // The regex items are processed in alphabetical order of regex term
 
 this.regexList = [
-{ regex: /[\+\*\-\=\?>:\\\/<\&]/gm, css: 'preprocessor' }, //operators
-//{ regex: /[A-Z0-9_]+?\(/gmi, css: 'udfunctions'}, //UD Functions
-//{ regex: /(\()/gmi, css: 'plain'}, //convert all ( to plain
+{ regex: /[\+\*\-\=\?>:\\\/<\&%]/gm, css: 'preprocessor' }, //operators
+{ regex: /\s[0-9]*(\s|)/gm, css: 'numbers' },
+{ regex: /^[ \t]*[A-Z0-9_]+?(?=\(.*\))/gmi, css: 'udfunctions'}, //UD Functions (using Look-ahead ass)
 
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
@@ -140,7 +142,7 @@ this.regexList = [
 { regex: new RegExp(this.getKeywords(keys), 'gmi'), css: 'value' }, // values (actually Keys)
 { regex: new RegExp(this.getKeywords(commands), 'gmi'), css: 'constants' }, // constants
 { regex: new RegExp(this.getKeywords(directives), 'gmi'), css: 'keyword' }, // directives
-{ regex: /^\s*\S+\:(?!=)/gm, css: 'labels' }, // labels
+{ regex: /^[ \t]*[\S]+?(?=:)/gmi, css: 'labels' }, // labels
 { regex: new RegExp(this.getKeywords(keywords), 'gmi'), css: 'keyword' } // keywords
 ];
 
