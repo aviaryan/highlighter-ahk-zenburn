@@ -123,8 +123,9 @@ var signs = '\+ \\ \/ \* \+ \? \: \> \< \& \*\*';
 
 this.regexList = [
 { regex: /[\+\*\-\=\?>:\\\/<\&%]/gm, css: 'preprocessor' }, //operators
-{ regex: /\s[0-9]*(\s|)/gm, css: 'numbers' },
-{ regex: /^[ \t]*[A-Z0-9_]+?(?=\(.*\))/gmi, css: 'udfunctions'}, //UD Functions (using Look-ahead ass)
+{ regex: /\s[0-9]*(?=\W)/gm, css: 'numbers' },
+{ regex: /[^\(\); \t,\n\+\*\-\=\?>:\\\/<\&%]+?(?=\(.*?\))/gmi, css: 'functions'}, //UD Functions CALL
+{ regex: /^[ \t]*[\S]+?(?=\(.*\))/gmi, css: 'functions'}, //UD Functions (using Look-ahead ass)
 
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
