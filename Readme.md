@@ -22,5 +22,8 @@ See [Web preview](https://rawgit.com/aviaryan/highlighter-ahk-zenburn/master/Tes
   
   
 #### Changelog
+30/06/2014  
+- Fixed bug with number highlighting  
+  
 29/06/2014  
 - Added [Github](http://www.github.com) theme.

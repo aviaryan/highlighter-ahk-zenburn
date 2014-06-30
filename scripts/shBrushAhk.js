@@ -116,14 +116,12 @@ var directives = 'AllowSameLineComments ClipboardTimeout CommentFlag ErrorStdOut
 ' IfWinNotActive IfWinNotExist Include IncludeAgain InstallKeybdHook InstallMouseHook KeyHistory LTrim MaxHotkeysPerInterval MaxMem' +
 ' MaxThreads MaxThreadsBuffer MaxThreadsPerHotkey NoEnv NoTrayIcon Persistent SingleInstance UseHook WinActivateForce';
 
-var signs = '\+ \\ \/ \* \+ \? \: \> \< \& \*\*';
-
 // css color keywords:
 // The regex items are processed in alphabetical order of regex term
 
 this.regexList = [
+{ regex: /\b[0-9]+(\.)?[0-9]*/gmi, css: 'numbers' },
 { regex: /[\+\*\-\=\?>:\\\/<\&%]/gm, css: 'preprocessor' }, //operators
-{ regex: /\s[0-9]*(?=\W)/gm, css: 'numbers' },
 { regex: /[^\(\); \t,\n\+\*\-\=\?>:\\\/<\&%]+?(?=\(.*?\))/gmi, css: 'functions'}, //UD Functions CALL
 { regex: /^[ \t]*[\S]+?(?=\(.*\))/gmi, css: 'functions'}, //UD Functions (using Look-ahead ass)
 
