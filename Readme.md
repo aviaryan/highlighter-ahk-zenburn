@@ -22,6 +22,9 @@ See [Web preview](https://rawgit.com/aviaryan/highlighter-ahk-zenburn/master/Tes
   
   
 #### Changelog
+5/07/2014  
+- Standardized the color schemes, now the ahk brush will get highlighted perfectly with all other brushes
+  
 30/06/2014  
 - Fixed bug with number highlighting  
   

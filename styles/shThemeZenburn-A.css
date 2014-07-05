@@ -97,13 +97,13 @@
 .syntaxhighlighter .functions {
   color: #fbb3f3 /*aaaaaa*/ !important;
 }
-.syntaxhighlighter .udfunctions {
+.syntaxhighlighter .color3 {
   color: #F097A7 !important;
 }
-.syntaxhighlighter .labels {
+.syntaxhighlighter .color1 {
   color: #bbd9d2 !important;
 }
-.syntaxhighlighter .numbers {
+.syntaxhighlighter .color2 {
   color:#FF925E !important;
 }
 .syntaxhighlighter .constants {
@@ -113,15 +113,6 @@
   font-weight: normal !important;
   color: #d01d33 !important;
   background-color: none !important;
-}
-.syntaxhighlighter .color1, .syntaxhighlighter .color1 a {
-  color: #ffc074 !important;
-}
-.syntaxhighlighter .color2, .syntaxhighlighter .color2 a {
-  color: #4a8cdb !important;
-}
-.syntaxhighlighter .color3, .syntaxhighlighter .color3 a {
-  color: #96daff !important;
 }
 
 .syntaxhighlighter .functions {

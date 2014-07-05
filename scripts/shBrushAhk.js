@@ -120,11 +120,11 @@ var directives = 'AllowSameLineComments ClipboardTimeout CommentFlag ErrorStdOut
 // The regex items are processed in alphabetical order of regex term
 
 this.regexList = [
-{ regex: /\b[0-9]+(\.)?[0-9]*/gmi, css: 'numbers' },
+{ regex: /\b[0-9]+(\.)?[0-9]*/gmi, css: 'color2' },
 { regex: /[\+\*\-\=\?>:\\\/<\&%]/gm, css: 'preprocessor' }, //operators
 { regex: /[^\(\); \t,\n\+\*\-\=\?>:\\\/<\&%]+?(?=\(.*?\))/gmi, css: 'functions'}, //UD Functions CALL
 { regex: /^[ \t]*[\S]+?(?=\(.*\))/gmi, css: 'functions'}, //UD Functions (using Look-ahead ass)
-
+// UD FUNCTIONS = COLOR3 in css
 { regex: /;.*$/gm, css: 'comments' }, // one line comments
 { regex: SyntaxHighlighter.regexLib.multiLineCComments, css: 'comments' }, // multiline comments
 { regex: /"(([^"]|"")*)"/gmi, css: 'string' }, // double quoted strings
@@ -141,7 +141,7 @@ this.regexList = [
 { regex: new RegExp(this.getKeywords(keys), 'gmi'), css: 'value' }, // values (actually Keys)
 { regex: new RegExp(this.getKeywords(commands), 'gmi'), css: 'constants' }, // constants
 { regex: new RegExp(this.getKeywords(directives), 'gmi'), css: 'keyword' }, // directives
-{ regex: /^[ \t]*[\S]+?(?=:)/gmi, css: 'labels' }, // labels
+{ regex: /^[ \t]*[\S]+?(?=:)/gmi, css: 'color1' }, // labels
 { regex: new RegExp(this.getKeywords(keywords), 'gmi'), css: 'keyword' } // keywords
 ];
 
