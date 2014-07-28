@@ -120,7 +120,7 @@ var directives = 'AllowSameLineComments ClipboardTimeout CommentFlag ErrorStdOut
 // The regex items are processed in alphabetical order of regex term
 
 this.regexList = [
-{ regex: /\b[0-9]+(\.)?[0-9]*/gmi, css: 'color2' },
+{ regex: /\b[0-9]+(\.)?[0-9]*/gmi, css: 'color2' }, //numbers
 { regex: /[\+\*\-\=\?>:\\\/<\&%]/gm, css: 'preprocessor' }, //operators
 { regex: /[^\(\); \t,\n\+\*\-\=\?>:\\\/<\&%]+?(?=\(.*?\))/gmi, css: 'functions'}, //UD Functions CALL
 { regex: /^[ \t]*[\S]+?(?=\(.*\))/gmi, css: 'functions'}, //UD Functions (using Look-ahead ass)

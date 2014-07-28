@@ -1,5 +1,8 @@
 ## AutoHotkey [Syntax Highlighter](http://alexgorbatchev.com/SyntaxHighlighter/) Brush with Zenburn and GitHub themes
   
+> This project (the autohotkey part) is deprecated. I recommend trying [lightAHK](https://github.com/aviaryan/lightAHK)
+
+
 **Note** - The themes can be used with any brush (programming language)  
 Thanks to **[mjneish](http://users.on.net/~mjneish)** who first provided syntax brush for Autohotkey.  
   
